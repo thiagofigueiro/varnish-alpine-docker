@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t thiagofigueiro/varnish-alpine-docker:ci .
+  - docker run -i -d -p 80 -e VARNISH_BACKEND_IP=google.com -e VARNISH_BACKEND_PORT=80 thiagofigueiro/varnish-alpine-docker:ci
+  - docker ps -a
+
+script:
+  - echo "TODO: do stuff here"
+
+after_script:
+  - docker stop $(docker ps -a -q)
+  - docker rm $(docker ps -a -q)
