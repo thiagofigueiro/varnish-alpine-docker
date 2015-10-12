@@ -1,4 +1,9 @@
-# A Varnish docker container based on Alpine Linux
+# varnish-alpine-docker
+![Build Status](https://img.shields.io/travis/thiagofigueiro/varnish-alpine-docker/master.svg)
+![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
+![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
+
+A Varnish docker container based on Alpine Linux.
 
 ## Quick start
 TODO
