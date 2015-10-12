@@ -5,6 +5,7 @@ services:
 
 before_install:
   - docker build -t thiagofigueiro/varnish-alpine-docker:ci .
+  - sudo service docker restart ; sleep 10
   - docker run -i -d -p 80 -e VARNISH_BACKEND_IP=google.com -e VARNISH_BACKEND_PORT=80 thiagofigueiro/varnish-alpine-docker:ci
   - docker ps -a
 
