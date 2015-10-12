@@ -1,5 +1,5 @@
 # varnish-alpine-docker
-![Build Status](https://img.shields.io/travis/thiagofigueiro/varnish-alpine-docker/master.svg)
+![Build Status](https://api.travis-ci.org/thiagofigueiro/varnish-alpine-docker.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 ![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 
