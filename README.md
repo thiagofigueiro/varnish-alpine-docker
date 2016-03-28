@@ -5,8 +5,32 @@
 
 A Varnish docker container based on Alpine Linux.
 
+## Environment variables
+* `VARNISH_BACKEND_ADDRESS` - host/ip of your backend.  Defaults to 192.168.1.65.
+* `VARNISH_BACKEND_PORT` - TCP port of your backend.  Defaults to 80.
+* `VARNISH_MEMORY` - how much memory Varnish can use for caching. Defaults to 100M.
+
 ## Quick start
-TODO
+
+Run with defaults:
+
+```bash
+docker run -ti --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+```
+
+Specify your backend configuration:
+
+```bash
+docker run -e VARNISH_BACKEND_ADDRESS=a.b.c.d -e VARNISH_BACKEND_PORT=nn -ti --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+```
+
+Build image locally:
+
+```bash
+git clone git@github.com:thiagofigueiro/varnish-alpine-docker.git
+cd varnish-alpine-docker
+docker build -t varnish-alpine-docker .
+```
 
 ## Software
 * [Varnish 4.1](https://www.varnish-cache.org/docs/4.1/)
