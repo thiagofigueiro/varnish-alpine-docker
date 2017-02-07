@@ -1,7 +1,7 @@
 # varnish-alpine-docker
-![Build Status](https://api.travis-ci.org/thiagofigueiro/varnish-alpine-docker.svg)
-![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
-![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
+[![Build Status](https://api.travis-ci.org/thiagofigueiro/varnish-alpine-docker.svg)](https://travis-ci.org/thiagofigueiro/varnish-alpine-docker)
+[![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg)](https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg)](https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 
 A very small Varnish docker image based on Alpine Linux.
 
