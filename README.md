@@ -3,7 +3,7 @@
 ![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 ![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 
-A Varnish docker container based on Alpine Linux.
+A very small Varnish docker image based on Alpine Linux.
 
 ## Environment variables
 * `VARNISH_BACKEND_ADDRESS` - host/ip of your backend.  Defaults to 192.168.1.65.
@@ -33,9 +33,20 @@ docker build -t varnish-alpine-docker .
 ```
 
 ## Software
-* [Varnish 4.1](https://www.varnish-cache.org/docs/4.1/)
+
+* [Varnish](https://www.varnish-cache.org/)
+* [Alpine Linux](https://www.alpinelinux.org/)
 * [Docker Alpine](https://github.com/gliderlabs/docker-alpine)
-* [Alpine Linux 3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html)
+
+### Versions
+
+The Docker image tag corresponds to the Alpine Linux version used.  The Varnish
+version used is whatever Alpine have packaged.
+
+| Image tag | Alpine Version | Varnish version |
+|-----------|----------------|-----------------|
+| 3.3 | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
+| 3.4 | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
 
 ## Acknowledgements
 * https://github.com/jacksoncage/varnish-docker
