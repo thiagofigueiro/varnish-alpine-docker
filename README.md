@@ -3,7 +3,7 @@
 ![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 ![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg?link=https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 
-A Varnish docker container based on Alpine Linux in less than 100MB.
+A very small Varnish docker image based on Alpine Linux.
 
 ## Environment variables
 * `VARNISH_BACKEND_ADDRESS` - host/ip of your backend.  Defaults to 192.168.1.65.
@@ -15,13 +15,13 @@ A Varnish docker container based on Alpine Linux in less than 100MB.
 Run with defaults:
 
 ```bash
-docker run -ti --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+docker run -Pit --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
 ```
 
 Specify your backend configuration:
 
 ```bash
-docker run -e VARNISH_BACKEND_ADDRESS=a.b.c.d -e VARNISH_BACKEND_PORT=nn -ti --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+docker run -Pit -e VARNISH_BACKEND_ADDRESS=192.168.1.65 -e VARNISH_BACKEND_PORT=80 --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
 ```
 
 Build image locally:
