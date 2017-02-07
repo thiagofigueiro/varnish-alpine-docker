@@ -15,13 +15,16 @@ A very small Varnish docker image based on Alpine Linux.
 Run with defaults:
 
 ```bash
-docker run -ti --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+docker run -Pit --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
 ```
 
 Specify your backend configuration:
 
 ```bash
-docker run -e VARNISH_BACKEND_ADDRESS=a.b.c.d -e VARNISH_BACKEND_PORT=nn -ti --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+docker run -e VARNISH_BACKEND_ADDRESS=a.b.c.d \
+           -e VARNISH_BACKEND_PORT=nn \
+           -e VARNISH_MEMORY=1G \
+           -Pit --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
 ```
 
 Build image locally:
@@ -45,8 +48,9 @@ version used is whatever Alpine have packaged.
 
 | Image tag | Alpine Version | Varnish version |
 |-----------|----------------|-----------------|
-| 3.3 | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
+| latest | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
 | 3.4 | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
+| 3.3 | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
 
 ## Acknowledgements
 * https://github.com/jacksoncage/varnish-docker
