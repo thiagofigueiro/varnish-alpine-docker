@@ -1,16 +1,20 @@
 sudo: required
 
+language: python
+python:
+  - "3.5"
+
+cache:
+  - pip
+
 services:
   - docker
 
 before_install:
   - docker build -t thiagofigueiro/varnish-alpine-docker:ci .
-  - sudo service docker restart ; sleep 10
-  - docker run -i -d -p 80 -e VARNISH_BACKEND_IP=google.com -e VARNISH_BACKEND_PORT=80 thiagofigueiro/varnish-alpine-docker:ci
+  - sudo service docker restart ; sleep 5
 
-# TODO: add a real test
+install: "pip install -r requirements.txt"
+
 script:
-  - docker ps -a
-
-after_script:
-  - docker rm -f $(docker ps -a -q)
+  - py.test --junitxml=junit.xml --color=yes -v
