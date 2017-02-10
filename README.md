@@ -49,7 +49,7 @@ version used is whatever Alpine have packaged.
 | Image tag | Alpine Version | Varnish version |
 |-----------|----------------|-----------------|
 | latest | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
-| 3.4 | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
+| 3.4-2 | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
 | 3.3 | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
 
 ## Acknowledgements
