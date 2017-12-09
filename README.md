@@ -50,6 +50,7 @@ version used is whatever Alpine have packaged.
 |-----------|----------------|-----------------|
 | latest | [3.7.0](https://www.alpinelinux.org/posts/Alpine-3.7.0-released.html) | [5.2.1-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.7)
 | 3.7 | [3.7.0](https://www.alpinelinux.org/posts/Alpine-3.7.0-released.html) | [5.2.1-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.7)
+| 3.6 | [3.6.0](https://www.alpinelinux.org/posts/Alpine-3.6.0-released.html) | [4.1.9-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.6)
 | 3.5 | [3.5.0](https://www.alpinelinux.org/posts/Alpine-3.5.0-released.html) | [4.1.3-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.5)
 | 3.4 | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
 | 3.3 | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
