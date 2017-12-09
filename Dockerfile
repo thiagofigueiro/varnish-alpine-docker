@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.6
 LABEL maintainer="https://github.com/thiagofigueiro/varnish-alpine-docker"
 ENV REFRESHED_AT 2018-04-22
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
