@@ -1,18 +1,8 @@
 import dns.resolver
 import json
-import pytest
 import requests
 from subprocess import getoutput, run, DEVNULL
-from time import sleep
-
-
-def _get_host_port():
-    container_info = json.loads(getoutput('docker inspect varnish-alpine'))[0]
-    return int(container_info['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'])
-
-
-def _kill_docker():
-    run(['docker', 'rm', '-f', 'varnish-alpine'], stdout=DEVNULL)
+from time import sleep, time
 
 
 def _get_first_address(name):
@@ -25,14 +15,18 @@ def _get_first_address(name):
 
 
 class DockerTest:
-
     def __init__(self, host):
         self.host = host
+        self.container_name = 'varnish-alpine-' + str(time())
         self._start_docker()
-        self.host_port = _get_host_port()
+        self.host_port = self._get_host_port()
 
     def close(self):
-        _kill_docker()
+        run(['docker', 'rm', '-f', self.container_name], stdout=DEVNULL)
+
+    def _get_host_port(self):
+        container_info = json.loads(getoutput('docker inspect ' + self.container_name))[0]
+        return int(container_info['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'])
 
     def __exit__(self):
         self.close()
@@ -44,19 +38,26 @@ class DockerTest:
         ip_address = _get_first_address(self.host)
         run(['docker', 'run', '-Pid', '-e',
              'VARNISH_BACKEND_ADDRESS={}'.format(ip_address), '-e',
-             'VARNISH_BACKEND_PORT=80', '--name=varnish-alpine',
+             'VARNISH_BACKEND_PORT=80', '--name=' + self.container_name,
              'thiagofigueiro/varnish-alpine-docker:ci'],
             stdout=DEVNULL)
         sleep(1)
 
-    def _request(self, path):
-        return requests.get(
-            self._get_url(path),
-            headers={'host': self.host},
-            allow_redirects=False)
+    def _request(self, path, **kwargs):
+        _kwargs = {
+            'headers': {'host': self.host},
+            'allow_redirects': False,
+        }
+        _kwargs.update(kwargs)
 
-    def _get_response_code(self, path):
-        r = self._request(path)
+        r = requests.get(
+            self._get_url(path),
+            **_kwargs,
+        )
+        return r
+
+    def _get_response_code(self, path, **kwargs):
+        r = self._request(path, **kwargs)
         return r.status_code
 
     def _get_url(self, path):
@@ -73,17 +74,19 @@ class DockerTest:
 
 class TestInstagram:
     def setup_class(self):
-        self.docker_test = DockerTest('instagramstatic-a.akamaihd.net')
+        self.docker_test = DockerTest('www.instagram.com')
 
     def teardown_class(self):
         self.docker_test.close()
 
     def test_200_cached(self):
         assert 200 == self.docker_test._get_response_code(
-                '/h1/images/appstore-install-badges/english_get.png/74c874cf7dc5.png')
+                '/static/images/homepage/screenshot1-2x.jpg/2debbd5aaab8.jpg',
+                allow_redirects=True,
+        )
         sleep(1)
         assert 0 < self.docker_test._get_age(
-                '/h1/images/appstore-install-badges/english_get.png/74c874cf7dc5.png')
+                '/static/images/homepage/screenshot1-2x.jpg/2debbd5aaab8.jpg')
 
 
 class TestGoogle:
