@@ -35,29 +35,24 @@ class DockerTest:
         self.close()
 
     def _start_docker(self):
-        ip_address = _get_first_address(self.host)
+        backend_address = _get_first_address(self.host)
         run(['docker', 'run', '-Pid', '-e',
-             'VARNISH_BACKEND_ADDRESS={}'.format(ip_address), '-e',
+             'VARNISH_BACKEND_ADDRESS={}'.format(backend_address), '-e',
              'VARNISH_BACKEND_PORT=80', '--name=' + self.container_name,
              'thiagofigueiro/varnish-alpine-docker:ci'],
             stdout=DEVNULL)
         sleep(1)
 
-    def _request(self, path, **kwargs):
-        _kwargs = {
-            'headers': {'host': self.host},
-            'allow_redirects': False,
-        }
-        _kwargs.update(kwargs)
-
+    def _request(self, path):
         r = requests.get(
             self._get_url(path),
-            **_kwargs,
+            headers={'host': self.host},
+            allow_redirects=False,
         )
         return r
 
-    def _get_response_code(self, path, **kwargs):
-        r = self._request(path, **kwargs)
+    def _get_response_code(self, path):
+        r = self._request(path)
         return r.status_code
 
     def _get_url(self, path):
@@ -70,23 +65,6 @@ class DockerTest:
     def _get_age(self, path):
         headers = self._get_headers(path)
         return int(headers['Age'])
-
-
-class TestInstagram:
-    def setup_class(self):
-        self.docker_test = DockerTest('www.instagram.com')
-
-    def teardown_class(self):
-        self.docker_test.close()
-
-    def test_200_cached(self):
-        assert 200 == self.docker_test._get_response_code(
-                '/static/images/homepage/screenshot1-2x.jpg/2debbd5aaab8.jpg',
-                allow_redirects=True,
-        )
-        sleep(1)
-        assert 0 < self.docker_test._get_age(
-                '/static/images/homepage/screenshot1-2x.jpg/2debbd5aaab8.jpg')
 
 
 class TestGoogle:
@@ -106,3 +84,7 @@ class TestGoogle:
         assert 200 == self.docker_test._get_response_code(
                 '/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png')
 
+    def test_200_cached(self):
+        sleep(0.1)  # ensure other previous request is done
+        assert 0 == self.docker_test._get_age(
+                '/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png')
