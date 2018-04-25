@@ -1,6 +1,6 @@
-FROM alpine:3.7
+FROM alpine:edge
 LABEL maintainer="https://github.com/thiagofigueiro/varnish-alpine-docker"
-ENV REFRESHED_AT 2018-04-22
+ENV REFRESHED_AT 2018-04-25
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
 ENV VARNISH_MEMORY 100M
 ENV VARNISH_BACKEND_PORT 80
