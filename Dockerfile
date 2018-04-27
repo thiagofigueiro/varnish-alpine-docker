@@ -1,5 +1,5 @@
 FROM alpine:3.7
-MAINTAINER  Thiago Figueiro <thiagocsf@gmail.com>
+LABEL maintainer="https://github.com/thiagofigueiro/varnish-alpine-docker"
 ENV REFRESHED_AT 2017-12-09
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
 ENV VARNISH_MEMORY 100M
