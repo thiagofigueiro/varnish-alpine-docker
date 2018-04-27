@@ -27,6 +27,14 @@ docker run -e VARNISH_BACKEND_ADDRESS=a.b.c.d \
            -Pit --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
 ```
 
+Alternatively, specify a varnish config file
+
+```bash
+docker run -e VARNISH_CONFIG_FILE=/etc/varnish/default.vcl \
+           -v /LOCAL/PATH/TO/default.vcl:/etc/varnish/default.vcl \
+           -Pit --name=varnish-alpine thiagofigueiro/varnish-alpine-docker
+```
+
 Build image locally:
 
 ```bash
