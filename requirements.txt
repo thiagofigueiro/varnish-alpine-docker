@@ -4,17 +4,16 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-attrs==17.3.0             # via pytest
-certifi==2017.11.5        # via requests
+atomicwrites==1.2.1       # via pytest
+attrs==18.2.0             # via pytest
+certifi==2018.11.29       # via requests
 chardet==3.0.4            # via requests
-dnspython==1.15.0
-idna==2.6                 # via requests
-pluggy==0.6.0             # via pytest
-py==1.5.2                 # via pytest
-pytest==3.3.1
-requests==2.18.4
-six==1.11.0               # via pytest
-urllib3==1.22             # via requests
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools                # via pytest
+dnspython==1.16.0
+idna==2.8                 # via requests
+more-itertools==4.3.0     # via pytest
+pluggy==0.8.0             # via pytest
+py==1.7.0                 # via pytest
+pytest==4.0.2
+requests==2.21.0
+six==1.12.0               # via more-itertools, pytest
+urllib3==1.24.1           # via requests
