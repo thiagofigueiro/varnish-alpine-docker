@@ -14,7 +14,7 @@ before_install:
   - docker build -t thiagofigueiro/varnish-alpine-docker:ci .
   - sudo service docker restart ; sleep 5
 
-install: "pip install -r requirements.txt"
+install: "pip install -r requirements.in"
 
 script:
   - pytest --junitxml=junit.xml --color=yes -v

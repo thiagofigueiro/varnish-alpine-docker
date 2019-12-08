@@ -56,13 +56,14 @@ version used is whatever Alpine have packaged.
 
 | Image tag | Alpine Version | Varnish version |
 |-----------|----------------|-----------------|
-| latest | [3.8.0](https://www.alpinelinux.org/posts/Alpine-3.8.0-released.html) | [6.0.2-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.8)
-| 3.8 | [3.8.0](https://www.alpinelinux.org/posts/Alpine-3.8.0-released.html) | [6.0.2-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.8)
-| 3.7 | [3.7.0](https://www.alpinelinux.org/posts/Alpine-3.7.0-released.html) | [5.2.1-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.7)
-| 3.6 | [3.6.0](https://www.alpinelinux.org/posts/Alpine-3.6.0-released.html) | [4.1.9-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.6)
-| 3.5 | [3.5.0](https://www.alpinelinux.org/posts/Alpine-3.5.0-released.html) | [4.1.3-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.5)
-| 3.4 | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
-| 3.3 | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
+| latest | [3.10.0](https://www.alpinelinux.org/posts/Alpine-3.10.0-released.html) | [6.2.1-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.10)
+| 3.10 | [3.10.0](https://www.alpinelinux.org/posts/Alpine-3.10.0-released.html) | [6.2.1-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.10)
+| 3.8  | [3.8.0](https://www.alpinelinux.org/posts/Alpine-3.8.0-released.html) | [6.0.2-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.8)
+| 3.7  | [3.7.0](https://www.alpinelinux.org/posts/Alpine-3.7.0-released.html) | [5.2.1-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.7)
+| 3.6  | [3.6.0](https://www.alpinelinux.org/posts/Alpine-3.6.0-released.html) | [4.1.9-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.6)
+| 3.5  | [3.5.0](https://www.alpinelinux.org/posts/Alpine-3.5.0-released.html) | [4.1.3-r0](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.5)
+| 3.4  | [3.4.6](https://www.alpinelinux.org/posts/Alpine-3.4.6-released.html) | [4.1.2-r3](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.4)
+| 3.3  | [3.3.3](http://www.alpinelinux.org/posts/Alpine-3.3.3-released.html) | [4.1.2-r1](https://pkgs.alpinelinux.org/packages?name=varnish&branch=v3.3)
 
 ## Acknowledgements
 * https://github.com/jacksoncage/varnish-docker
