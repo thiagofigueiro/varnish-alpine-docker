@@ -1,0 +1,34 @@
+---
+variables:
+    DOCKER_CI_TAG: thiagofigueiro/varnish-alpine-docker:ci
+    IMAGE_PATH: docker-image/varnish-alpine-docker.tar
+#
+docker-build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - cat /etc/os-release
+    - docker build --pull -t "${DOCKER_CI_TAG}" .
+    - mkdir -p "$(dirname "${IMAGE_PATH}")"
+    - docker save "${DOCKER_CI_TAG}" > "${IMAGE_PATH}"
+  artifacts:
+    paths:
+      - docker-image
+#
+test-image:
+  image: docker:latest
+  stage: test
+  services:
+    - docker:dind
+  script:
+    - docker load -i docker-image/varnish-alpine-docker.tar
+    - apk update
+    - apk add py3-pip
+    - pip3 install -r requirements.in
+    - pytest --junitxml=junit.xml --color=yes -v
+  artifacts:
+    paths:
+      - junit.xml
+
