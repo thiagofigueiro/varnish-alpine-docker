@@ -1,34 +1,42 @@
 ---
-variables:
-    DOCKER_CI_TAG: thiagofigueiro/varnish-alpine-docker:ci
-    IMAGE_PATH: docker-image/varnish-alpine-docker.tar
-#
 docker-build:
   image: docker:latest
+  services:
+    - docker:dind
   stage: build
-  services:
-    - docker:dind
   script:
-    - cat /etc/os-release
-    - docker build --pull -t "${DOCKER_CI_TAG}" .
-    - mkdir -p "$(dirname "${IMAGE_PATH}")"
-    - docker save "${DOCKER_CI_TAG}" > "${IMAGE_PATH}"
-  artifacts:
-    paths:
-      - docker-image
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+    - docker build --pull -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}" .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
 #
-test-image:
-  image: docker:latest
-  stage: test
+.test_template: &test_template
+  variables:
+    VARNISH_BACKEND_PORT: 80
+# FIXME: VARNISH_BACKEND_ADDRESS: $(dig +short A $VARNISH_BACKEND_HOSTNAME)
+#    VARNISH_BACKEND_HOSTNAME: 'set this on the job definition'
+#    PYTEST_ARGS: 'set this on the job definition; e.g. tests/test_integration.py::TestInstagram'
+  image: python:3.8-alpine
   services:
-    - docker:dind
+    - name: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
+      alias: varnish-alpine-docker
+  stage: test
   script:
-    - docker load -i docker-image/varnish-alpine-docker.tar
-    - apk update
-    - apk add py3-pip
-    - pip3 install -r requirements.in
-    - pytest --junitxml=junit.xml --color=yes -v
+    - pip install -r requirements.in
+    - pytest --junitxml=junit.xml --color=yes -v "${PYTEST_ARGS}"
   artifacts:
     paths:
       - junit.xml
-
+#
+test-google:
+  <<: *test_template
+  variables:
+    PYTEST_ARGS: tests/test_integration.py::TestGoogle
+    VARNISH_BACKEND_HOSTNAME: www.google.com
+    VARNISH_BACKEND_ADDRESS: 216.239.34.117
+#
+test-instagram:
+  <<: *test_template
+  variables:
+    PYTEST_ARGS: tests/test_integration.py::TestInstagram
+    VARNISH_BACKEND_HOSTNAME: www.instagram.com
+    VARNISH_BACKEND_ADDRESS: 157.240.8.174
