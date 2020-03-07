@@ -3,6 +3,9 @@ import json
 import requests
 from subprocess import getoutput, run, DEVNULL
 from time import sleep, time
+from urllib3.exceptions import HTTPError
+
+TIMEOUT = 10  # seconds
 
 
 def _get_first_address(name):
@@ -20,19 +23,41 @@ class DockerTest:
         self.container_name = 'varnish-alpine-' + str(time())
         self._start_docker()
         self.host_port = self._get_host_port()
+        self._wait_for_varnish()
 
     def close(self):
         run(['docker', 'rm', '-f', self.container_name], stdout=DEVNULL)
 
     def _get_host_port(self):
         container_info = json.loads(getoutput('docker inspect ' + self.container_name))[0]
-        return int(container_info['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'])
+        try:
+            return int(container_info['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'])
+        except KeyError:
+            raise RuntimeError('Varnish container not listening on 80/tcp') from None
 
     def __exit__(self):
         self.close()
 
     def __del__(self):
         self.close()
+
+    def _wait_for_varnish(self):
+        elapsed_time = 0
+        ready = False
+        print(f'Waiting {TIMEOUT}s for varnish to be available')
+        while elapsed_time < TIMEOUT and not ready:
+            try:
+                response_code = self._get_response_code('/')
+                if response_code in (200, 301, 404):
+                    ready = True
+            except (ConnectionRefusedError, ConnectionError, IOError, HTTPError):
+                print(elapsed_time)
+                pass
+            sleep(1)
+            elapsed_time += 1
+
+        if not ready:
+            raise RuntimeError(f'Timeout waiting for varnish on {self._get_host_port()}')
 
     def _start_docker(self):
         ip_address = _get_first_address(self.host)
