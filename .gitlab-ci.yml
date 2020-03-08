@@ -1,4 +1,10 @@
 ---
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+#
+include:
+  - template: Container-Scanning.gitlab-ci.yml
+#
 docker-build:
   image: docker:latest
   services:
@@ -6,8 +12,8 @@ docker-build:
   stage: build
   script:
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
-    - docker build --pull -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}" .
-    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
+    - docker build --pull -t "${IMAGE_TAG}" .
+    - docker push "${IMAGE_TAG}"
 #
 .test_template: &test_template
   variables:
@@ -17,7 +23,7 @@ docker-build:
 #    PYTEST_ARGS: 'set this on the job definition; e.g. tests/test_integration.py::TestInstagram'
   image: python:3.8-alpine
   services:
-    - name: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
+    - name: "${IMAGE_TAG}"
       alias: varnish-alpine-docker
   stage: test
   script:
