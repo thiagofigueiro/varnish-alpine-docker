@@ -3,4 +3,5 @@
 .cache/
 .idea/
 .pytest_cache/
+.python-version
 junit.xml
