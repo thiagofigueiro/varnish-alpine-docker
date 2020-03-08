@@ -1,5 +1,5 @@
 # varnish-alpine-docker
-[![Build Status](https://api.travis-ci.org/thiagofigueiro/varnish-alpine-docker.svg)](https://travis-ci.org/thiagofigueiro/varnish-alpine-docker)
+[![pipeline status](https://gitlab.com/thiagocsf/varnish-alpine-docker/badges/master/pipeline.svg)](https://gitlab.com/thiagocsf/varnish-alpine-docker/-/commits/master)
 [![Docker Stars](https://img.shields.io/docker/stars/thiagofigueiro/varnish-alpine-docker.svg)](https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/thiagofigueiro/varnish-alpine-docker.svg)](https://hub.docker.com/r/thiagofigueiro/varnish-alpine-docker/)
 
@@ -38,7 +38,7 @@ docker run -e VARNISH_CONFIG_FILE=/etc/varnish/default.vcl \
 Build image locally:
 
 ```bash
-git clone git@github.com:thiagofigueiro/varnish-alpine-docker.git
+git clone git@gitlab.com:thiagocsf/varnish-alpine-docker.git
 cd varnish-alpine-docker
 docker build -t varnish-alpine-docker .
 ```

@@ -1,6 +1,5 @@
 FROM alpine:3.10
-LABEL maintainer="https://github.com/thiagofigueiro/varnish-alpine-docker"
-LABEL refreshed_at=2019-12-08
+LABEL maintainer="https://gitlab.com/thiagocsf/varnish-alpine-docker"
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
 ENV VARNISH_MEMORY 100M
 ENV VARNISH_BACKEND_PORT 80
