@@ -30,8 +30,8 @@ docker-build:
     - pip install -r requirements.in
     - pytest --junitxml=junit.xml --color=yes -v "${PYTEST_ARGS}"
   artifacts:
-    paths:
-      - junit.xml
+    reports:
+      junit: junit.xml
 #
 test-google:
   <<: *test_template
